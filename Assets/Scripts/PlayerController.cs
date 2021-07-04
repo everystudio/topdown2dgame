@@ -21,14 +21,25 @@ public class PlayerController : MonoBehaviour
 	private Rigidbody2D rbody;
 	private bool isMoving = false;
 
+	public static int hp = 3;
+	public static string gameState;
+	private bool inDamage = false;
+
 	private void Start()
 	{
 		rbody = GetComponent<Rigidbody2D>();
 		preAnimation = downAnime;
+
+		gameState = "playing";
 	}
 
 	private void Update()
 	{
+		if( gameState != "playing")
+		{
+			return;
+		}
+
 		if( isMoving == false)
 		{
 			axisH = Input.GetAxisRaw("Horizontal");
@@ -62,6 +73,18 @@ public class PlayerController : MonoBehaviour
 	}
 	private void FixedUpdate()
 	{
+		if( gameState != "playing")
+		{
+			return;
+		}
+		if( inDamage)
+		{
+			float val = Mathf.Sin(Time.time * 50);
+			//Debug.Log(val);
+			gameObject.GetComponent<SpriteRenderer>().enabled = 0 < val;
+			return;
+		}
+
 		rbody.velocity = new Vector2(axisH, axisV) * speed;
 	}
 
@@ -86,6 +109,59 @@ public class PlayerController : MonoBehaviour
 			angle = _preAngle;
 		}
 		return angle;
+	}
+
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		if(collision.gameObject.tag == "Enemy")
+		{
+			GetDamage(collision.gameObject);
+		}
+	}
+
+	private void GetDamage(GameObject _enemy)
+	{
+		if(gameState == "playing")
+		{
+			hp--;
+			Debug.Log("Player HP=" + hp);
+			if (0 < hp)
+			{
+				float knockbackSpeed = 4.0f;
+				rbody.velocity = Vector2.zero;
+				Vector3 v = (transform.position - _enemy.transform.position).normalized;
+				rbody.AddForce(
+					new Vector2(v.x * knockbackSpeed, v.y * knockbackSpeed),
+					ForceMode2D.Impulse);
+				inDamage = true;
+				Invoke("DamageEnd", 0.25f);
+			}
+			else
+			{
+				GameOver();
+			}
+		}
+	}
+
+	private void DamageEnd()
+	{
+		inDamage = false;
+		gameObject.GetComponent<SpriteRenderer>().enabled = true;
+	}
+	private void GameOver()
+	{
+		Debug.Log("ゲームオーバー");
+		gameState = "gameover";
+
+		/**
+		 * ゲームオーバー演出
+		 */
+		GetComponent<Collider2D>().enabled = false;
+		rbody.velocity = Vector2.zero;
+		rbody.gravityScale = 1.0f;
+		rbody.AddForce(new Vector2(0.0f, 5.0f), ForceMode2D.Impulse);
+		GetComponent<Animator>().Play(deadAnime);
+		Destroy(gameObject, 1.0f);
 	}
 
 }
