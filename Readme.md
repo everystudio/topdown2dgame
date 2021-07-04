@@ -130,5 +130,40 @@ RigidBody2d GravityScale:0
 
 カメラの追従は、Cinemachine使いましょ
 
-14:00
+あとは敵(Enemyというタグ)と当たったらダメージを受ける演出を追加
+
+14:30
 一旦作業終了
+
+21:30再開
+
+# シーンからシーンへ移動する
+
+Exitというタグを作る  
+
+スクリプト作成
+- Exit  
+- RoomManager
+
+プレイヤーもPlayerというタグをセットしてないと駄目だった。  
+
+Exitは触れるとシーンを移動するタイプのもの。
+SceneNameに移動先のシーン名、DoorNumberには対応したドアの番号を追加。
+向きは設置しているExitの向きでOK
+
+RoomManagerは各シーンに１つ設置
+
+
+# ドアを設置する
+
+Tag:Doorを追加  
+ドアの画像のPixelPerUnit : 32  
+スクリプト作成  
+
+ドアをプレファブ化  
+スプライト配置、OrderInLayer2。タグをDoorに変更  
+BoxCollider2Dをつける  
+
+とりあえず鍵を持っていたら
+
+
