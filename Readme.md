@@ -167,3 +167,22 @@ BoxCollider2Dをつける
 とりあえず鍵を持っていたら
 
 
+# アイテムを作る
+
+Itemsの画像のスプライトを準備32x32系  
+鍵、ハート、矢の束の画像をシーン内にドラッグアンドドロップ  
+
+CircleCollider2D + Rigidbody2D  
+GravityScale=0  
+
+CircleCollider2D  
+IsTrigger true;  
+
+Item用のスクリプト作成  
+
+鍵：扉を開けるようのarrangeIDの設定が必要になる（配置時）  
+矢：countの数だけ発射できる本数が増える  
+ライフ：特になし！  
+
+# 宝箱を作る
+

@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
 		if(gameState == "playing")
 		{
 			hp--;
-			Debug.Log("Player HP=" + hp);
+			//Debug.Log("Player HP=" + hp);
 			if (0 < hp)
 			{
 				float knockbackSpeed = 4.0f;
@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
 	}
 	private void GameOver()
 	{
-		Debug.Log("ゲームオーバー");
+		//Debug.Log("ゲームオーバー");
 		gameState = "gameover";
 
 		/**
