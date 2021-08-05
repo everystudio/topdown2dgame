@@ -23,7 +23,7 @@ public class ArrowShoot : MonoBehaviour
 	{
 		if ((Input.GetButtonDown("Fire3")))
 		{
-			//ItemKeeper.hasArrows += 1;
+			ItemKeeper.hasArrows += 1;
 			Attack();
 		}
 		float bowZ = -1;
