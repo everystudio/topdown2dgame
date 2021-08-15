@@ -186,3 +186,42 @@ Item用のスクリプト作成
 
 # 宝箱を作る
 
+画像セット、order in layer 2  
+capsulecollider2d追加  
+マルでもいいよ  
+
+スクリプト作成
+
+インスペクターには開いた時の画像をセットしましょう
+
+# 敵の作成
+
+画像の設定
+
+倒れてる画像をシーンビューにセット  
++RigidBody2D  
+- GravityScale=0
+- Freeze RotationZ ON
++CircleCollider2D  
+SpriteRenderer-OrderInLayer=3
+
+敵のスクリプトを作成
+
+# UI作成
+
+- 鍵、矢の本数表示
+- ライフの表示
+- ゲームのステータス
+
+# VirtualPadの作成
+
+なんか本のやつ気に入らなかったので作り直した。
+というかたまたまヒエラルキーの構成でうまく出来てるだけなので、もう少し作り直したほうが良いと思う
+
+
+
+
+
+
+
+
